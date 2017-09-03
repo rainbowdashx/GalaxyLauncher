@@ -10,7 +10,7 @@
         <Button x:Name="btnClose"  Click="btnClose_Click" Margin="758,10,10,558" Height="32" Width="32">
             <Image Source="Icons/appbar.close.png"/>
         </Button>
-        
+
         <Button x:Name="btnPlay" Content="PLAY" HorizontalAlignment="Left" Margin="724,555,0,0" VerticalAlignment="Top" Width="66" Height="35" Background="#FF0DCB41" BorderBrush="Black" Click="btnPlay_Click"/>
 
 
@@ -20,5 +20,7 @@
         </Button>
 
         <ProgressBar x:Name="pgbDownload" x:FieldModifier="public" HorizontalAlignment="Left" Height="32" Margin="10,558,0,0" VerticalAlignment="Top" Width="336"/>
+        <Label x:Name="label" Content="Galaxy Game" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Consolas" Height="71" Width="382" FontSize="52"/>
+        <Label x:Name="label1" Content="Dankest Dunge" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" FontSize="32" Foreground="White" Width="297"/>
     </Grid>
 </Window>
