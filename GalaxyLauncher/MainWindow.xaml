@@ -1,0 +1,24 @@
+﻿<Window x:Class="GalaxyLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GalaxyLauncher"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="Manual" WindowStyle="None" MouseDown="Window_MouseDown" Background="#FF222222">
+    <Grid>
+        <Button x:Name="btnClose"  Click="btnClose_Click" Margin="758,10,10,558" Height="32" Width="32">
+            <Image Source="Icons/appbar.close.png"/>
+        </Button>
+        
+        <Button x:Name="btnPlay" Content="PLAY" HorizontalAlignment="Left" Margin="724,555,0,0" VerticalAlignment="Top" Width="66" Height="35" Background="#FF0DCB41" BorderBrush="Black" Click="btnPlay_Click"/>
+
+
+
+        <Button x:Name="btnDownload" Margin="351,558,417,10" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="32" Width="32" Click="btnDownload_Click">
+            <Image Source="Icons/appbar.cloud.download.png"/>
+        </Button>
+
+        <ProgressBar x:Name="pgbDownload" x:FieldModifier="public" HorizontalAlignment="Left" Height="32" Margin="10,558,0,0" VerticalAlignment="Top" Width="336"/>
+    </Grid>
+</Window>
