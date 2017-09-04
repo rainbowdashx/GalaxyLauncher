@@ -59,7 +59,6 @@ namespace GalaxyLauncher
 
         public static Task<List<String>> CheckGameFiles(List<String> fileList, IProgress<int> progress)
         {
-
             int FileNum = 0;
             foreach (var item in fileList)
             {

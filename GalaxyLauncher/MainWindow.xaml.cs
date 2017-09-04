@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Squirrel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 
 
@@ -53,8 +56,11 @@ namespace GalaxyLauncher
 
         private async void btnDownload_Click(object sender, RoutedEventArgs e)
         {
-            btnDownload.IsEnabled = false;
 
+
+            btnDownload.IsEnabled = false;
+            
+            
             String oldVersionString = "0.0.0";
             String newVersionString = StreamHelper.ReadFile(StreamHelper.gameVersionFilePathOnline);
 
@@ -88,7 +94,7 @@ namespace GalaxyLauncher
 
 
 
-                
+
 
                 var progress = new Progress<int>(percent =>
                 {
