@@ -18,7 +18,7 @@ namespace GalaxyLauncher
         public static String manifestFileOnline = "/game/Win64/GameManifest.txt";
         public static String gameExecutable = "game/dummyWoW.exe";
         public static string gameFilesPathOnline = "game/Win64/bin/";
-        
+
 
         public static String ReadFile(String path)
         {
@@ -38,12 +38,14 @@ namespace GalaxyLauncher
         }
 
 
-        public static async Task DownloadFile(string path,long filesize)
+
+
+        public static async Task DownloadFile(string path, long filesize)
         {
 #if DEBUG
 
-            
-            MainWindow.WindowInstance.SetFilenameLabelText(path);
+
+            MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
             System.Threading.Thread.Sleep(1000);
 
 
@@ -51,14 +53,16 @@ namespace GalaxyLauncher
 
 #else
 
-            MainWindow.WindowInstance.SetFilenameLabelText(path);
+            MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
+
             await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
              {
                  MainWindow.WindowInstance.pgbFileProgress.Value = 0;
                  MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
              }));
 
-            string filePathSave = String.Format("{0}game{1}", AppDomain.CurrentDomain.BaseDirectory, path);
+            string filePathSave = GetLocalFilePath(path);
+
             EnsureFolder(filePathSave);
 
             using (WebClient client = new WebClient())
@@ -81,12 +85,12 @@ namespace GalaxyLauncher
             int FileNum = 0;
             foreach (var item in fileList)
             {
-                String[] fileString = item.Split(':');
-                String fileName = fileString[0];
-                String fileHash = fileString[1];
-                String fileSize = fileString[2];
+                string[] fileString = item.Split(':');
+                string fileName = fileString[0];
+                string fileHash = fileString[1];
+                string fileSize = fileString[2];
 
-                String filePath = string.Format("{0}game{1}", AppDomain.CurrentDomain.BaseDirectory, fileName);
+                string filePath = GetLocalFilePath(fileName);
 
                 List<String> removeList = new List<string>();
                 if (File.Exists(filePath) && GetChecksum(filePath).Equals(fileHash))
@@ -165,6 +169,10 @@ namespace GalaxyLauncher
             {
                 MainWindow.WindowInstance.pgbFileProgress.Value = e.BytesReceived;
             }));
+        }
+        private static string GetLocalFilePath(string filename)
+        {
+            return string.Format("{0}game{1}", Properties.Settings.Default.GamePath, filename);
         }
     }
 }

@@ -65,10 +65,10 @@ namespace GalaxyLauncher
 
             String oldVersionString = "0.0.0";
             String newVersionString = StreamHelper.ReadFile(StreamHelper.gameVersionFilePathOnline);
-
+            
             try
             {
-                oldVersionString = File.ReadAllText(System.IO.Path.Combine(Environment.CurrentDirectory, StreamHelper.gameVersionFilePathLocal));
+                oldVersionString = File.ReadAllText(System.IO.Path.Combine(Properties.Settings.Default.GamePath, StreamHelper.gameVersionFilePathLocal));
             }
             catch (Exception ex)
             {
