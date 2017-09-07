@@ -17,6 +17,8 @@ namespace GalaxyLauncher
         public static String gameVersionFilePathLocal = "game/GameVersion.txt";
         public static String manifestFileOnline = "/game/Win64/GameManifest.txt";
         public static String gameExecutable = "game/dummyWoW.exe";
+        public static string gameFilesPathOnline = "game/Win64/bin/";
+        
 
         public static String ReadFile(String path)
         {
@@ -36,26 +38,43 @@ namespace GalaxyLauncher
         }
 
 
-        public static void DownloadFile(String path)
+        public static async Task DownloadFile(string path,long filesize)
         {
 #if DEBUG
+
+            MainWindow.WindowInstance.SetFilenameLabelText(path);
 
             System.Threading.Thread.Sleep(1000);
 
 
+
+
 #else
-            FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create(new Uri(host, "game/Win64/bin/" + path));
 
-            String filePath = string.Format("{0}game{1}", AppDomain.CurrentDomain.BaseDirectory, path);
-            EnsureFolder(filePath);
 
-            using (Stream ftpStream = ftp.GetResponse().GetResponseStream())
-            using (Stream fileStream = File.Create(filePath))
+         await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
+             {
+                 MainWindow.WindowInstance.pgbFileProgress.Value = 0;
+                 MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
+             }));
+
+            string filePathSave = String.Format("{0}game{1}", AppDomain.CurrentDomain.BaseDirectory, path);
+            EnsureFolder(filePathSave);
+
+            using (WebClient client = new WebClient())
             {
-                ftpStream.CopyTo(fileStream);
+                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(OnFileDownloadProgress);
+                await client.DownloadFileTaskAsync(new Uri(host, gameFilesPathOnline + path), filePathSave);
+
             }
+
+
+            
+
 #endif
         }
+
+
 
         public static Task<List<String>> CheckGameFiles(List<String> fileList, IProgress<int> progress)
         {
@@ -84,25 +103,24 @@ namespace GalaxyLauncher
             return Task.FromResult(fileList);
         }
 
-        public static Task DownloadGameFiles(List<String> fileList, IProgress<int> progress)
+        public static async Task DownloadGameFiles(List<String> fileList, IProgress<int> progress)
         {
 
             int FileNum = 0;
             foreach (var item in fileList)
             {
-                String[] fileString = item.Split(':');
-                String fileName = fileString[0];
-                String fileHash = fileString[1];
-                String fileSize = fileString[2];
+                string[] fileString = item.Split(':');
+                string fileName = fileString[0];
+                string fileHash = fileString[1];
+                string fileSize = fileString[2];
                 Console.WriteLine(fileName);
-                DownloadFile(fileName);
+                await DownloadFile(fileName, long.Parse(fileSize));
                 FileNum++;
                 if (progress != null)
                 {
                     progress.Report(FileNum);
                 }
             }
-            return Task.FromResult(0);
         }
 
 
@@ -128,6 +146,25 @@ namespace GalaxyLauncher
                     return hash;
                 }
             }
+        }
+
+        private static long GetFileSize(string path)
+        {
+            //File Size Query
+            FtpWebRequest sizeRequest = (FtpWebRequest)WebRequest.Create(gameFilesPathOnline + path);
+            sizeRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+            using (WebResponse response = sizeRequest.GetResponse())
+            {
+                return response.ContentLength;
+            }
+        }
+
+        private static void OnFileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
+            MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                MainWindow.WindowInstance.pgbFileProgress.Value = e.BytesReceived;
+            }));
         }
     }
 }

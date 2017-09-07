@@ -28,13 +28,16 @@ namespace GalaxyLauncher
     public partial class MainWindow : Window
     {
 
-        public static ProgressBar Downloadbar;
+
+        public static MainWindow WindowInstance;
         private bool RepairMode = false;
+
 
 
         public MainWindow()
         {
             InitializeComponent();
+            WindowInstance = this;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -58,8 +61,8 @@ namespace GalaxyLauncher
 
 
             btnDownload.IsEnabled = false;
-            
-            
+
+
             String oldVersionString = "0.0.0";
             String newVersionString = StreamHelper.ReadFile(StreamHelper.gameVersionFilePathOnline);
 
@@ -136,5 +139,14 @@ namespace GalaxyLauncher
 
 
         }
+
+        public void SetFilenameLabelText(string text)
+        {
+            lblCurrentFile.Dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                lblCurrentFile.Content = text;
+            }));
+        }
+
     }
 }
