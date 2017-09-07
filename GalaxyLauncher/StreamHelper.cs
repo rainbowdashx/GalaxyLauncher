@@ -42,8 +42,8 @@ namespace GalaxyLauncher
         {
 #if DEBUG
 
+            
             MainWindow.WindowInstance.SetFilenameLabelText(path);
-
             System.Threading.Thread.Sleep(1000);
 
 
@@ -51,8 +51,8 @@ namespace GalaxyLauncher
 
 #else
 
-
-         await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
+            MainWindow.WindowInstance.SetFilenameLabelText(path);
+            await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
              {
                  MainWindow.WindowInstance.pgbFileProgress.Value = 0;
                  MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
