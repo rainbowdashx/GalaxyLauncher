@@ -27,5 +27,10 @@
         <Label x:Name="label1" Content="Dankest Dunge" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" FontSize="32" Foreground="White" Width="297"/>
         <Label x:Name="lblCurrentFile" Content="FileName" HorizontalAlignment="Left" Margin="10,517,0,0" VerticalAlignment="Top" Foreground="White" Width="709"/>
         <ProgressBar x:Name="pgbFileProgress" HorizontalAlignment="Left" Height="10" Margin="10,543,0,0" VerticalAlignment="Top" Width="336" Foreground="#FFFF5D00"/>
+        <Label x:Name="lblInstallPath" Content="Label" HorizontalAlignment="Left" Margin="49,134,0,0" VerticalAlignment="Top" Width="741" Foreground="White" Height="31"/>
+
+        <Button x:Name="btnInstallPath" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="10,134,751,435" Click="btnInstallPath_Click">
+            <Image Source="Icons/appbar.cog.png" />
+        </Button>
     </Grid>
 </Window>

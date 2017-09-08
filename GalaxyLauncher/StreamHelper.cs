@@ -45,12 +45,20 @@ namespace GalaxyLauncher
 #if DEBUG
 
 
+           await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                MainWindow.WindowInstance.pgbFileProgress.Value = filesize/2;
+                MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
+            }));
+
+
             MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
-            System.Threading.Thread.Sleep(1000);
 
-
-
-
+            await Task.Run(() => {
+                System.Threading.Thread.Sleep(1000);
+            });
+            
+            
 #else
 
             MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
@@ -71,9 +79,6 @@ namespace GalaxyLauncher
                 await client.DownloadFileTaskAsync(new Uri(host, gameFilesPathOnline + path), filePathSave);
 
             }
-
-
-            
 
 #endif
         }
