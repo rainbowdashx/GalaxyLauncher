@@ -85,7 +85,7 @@ namespace GalaxyLauncher
 
 
 
-        public static Task<List<String>> CheckGameFiles(List<String> fileList, IProgress<int> progress)
+        public static  Task<List<String>> CheckGameFiles(List<String> fileList, IProgress<int> progress)
         {
             int FileNum = 0;
             foreach (var item in fileList)
@@ -109,7 +109,7 @@ namespace GalaxyLauncher
                     progress.Report(FileNum);
                 }
             }
-            return Task.FromResult(fileList);
+            return  Task.FromResult(fileList);
         }
 
         public static async Task DownloadGameFiles(List<String> fileList, IProgress<int> progress)

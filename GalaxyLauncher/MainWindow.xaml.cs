@@ -150,7 +150,7 @@ namespace GalaxyLauncher
                pgbDownload.Maximum = lines.Count;
                pgbDownload.Foreground = Brushes.Orange;
            }));
-            FileCheckTask = StreamHelper.CheckGameFiles(lines, progress);
+            FileCheckTask = Task.Run(() => StreamHelper.CheckGameFiles(lines, progress));
             lines = await FileCheckTask;
 
 
