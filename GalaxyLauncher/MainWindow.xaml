@@ -8,7 +8,7 @@
         Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="Manual" WindowStyle="None" MouseDown="Window_MouseDown" Background="#FF222222">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Images/dragons_by_88grzes-d5rdw8e.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="Images/footer_lodyas.png" Stretch="UniformToFill"/>
         </Grid.Background>
         <Button x:Name="btnClose"  Click="btnClose_Click" Margin="758,10,10,558" Height="32" Width="32">
             <Image Source="Icons/appbar.close.png"/>
