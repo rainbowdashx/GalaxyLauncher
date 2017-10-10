@@ -85,9 +85,15 @@ namespace GalaxyLauncher
 
 
 
-        public static  Task<List<String>> CheckGameFiles(List<String> fileList, IProgress<int> progress)
+        public static Task<List<String>> CheckGameFiles(List<String> fileList, IProgress<int> progress)
         {
             int FileNum = 0;
+
+            //remove patch file  not listed in manifest
+            bool patchFileExists = false;
+            string patchFileName = "\\dummyWoW\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak";
+
+
             foreach (var item in fileList)
             {
                 string[] fileString = item.Split(':');
@@ -96,6 +102,11 @@ namespace GalaxyLauncher
                 string fileSize = fileString[2];
 
                 string filePath = GetLocalFilePath(fileName);
+
+                if (fileName.Equals(patchFileName))
+                {
+                    patchFileExists = true;
+                }
 
                 List<String> removeList = new List<string>();
                 if (File.Exists(filePath) && GetChecksum(filePath).Equals(fileHash))
@@ -109,7 +120,16 @@ namespace GalaxyLauncher
                     progress.Report(FileNum);
                 }
             }
-            return  Task.FromResult(fileList);
+
+            if (!patchFileExists)
+            {
+                string patchFilePath = GetLocalFilePath(patchFileName);
+                if (File.Exists(patchFilePath))
+                {
+                    File.Delete(patchFilePath);
+                }
+            }
+            return Task.FromResult(fileList);
         }
 
         public static async Task DownloadGameFiles(List<String> fileList, IProgress<int> progress)
