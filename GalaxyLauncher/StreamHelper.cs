@@ -13,11 +13,13 @@ namespace GalaxyLauncher
     {
 
         public static Uri host = new Uri("ftp://h2412564.stratoserver.net/");
-        public static String gameVersionFilePathOnline = "/game/Win64/bin/GameVersion.txt";
-        public static String gameVersionFilePathLocal = "game/GameVersion.txt";
-        public static String manifestFileOnline = "/game/Win64/GameManifest.txt";
-        public static String gameExecutable = "game/dummyWoW.exe";
-        public static string gameFilesPathOnline = "game/Win64/bin/";
+        //         public static String gameVersionFilePathOnline = "/game/Win64/bin/GameVersion.txt";
+        //         public static String gameVersionFilePathLocal = "game/GameVersion.txt";
+        //         public static String manifestFileOnline = "/game/Win64/GameManifest.txt";
+        //         public static String gameExecutable = "game/dummyWoW.exe";
+        //         public static string gameFilesPathOnline = "game/Win64/bin/";
+
+
 
 
         public static String ReadFile(String path)
@@ -35,6 +37,7 @@ namespace GalaxyLauncher
 
             return data;
 
+
         }
 
 
@@ -45,41 +48,45 @@ namespace GalaxyLauncher
 #if DEBUG
 
 
-           await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
-            {
-                MainWindow.WindowInstance.pgbFileProgress.Value = filesize/2;
-                MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
-            }));
-
-
-            MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
-
-            await Task.Run(() => {
-                System.Threading.Thread.Sleep(1000);
-            });
-            
-            
-#else
-
-            MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
-
             await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
              {
-                 MainWindow.WindowInstance.pgbFileProgress.Value = 0;
+                 MainWindow.WindowInstance.pgbFileProgress.Value = filesize / 2;
                  MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
              }));
 
-            string filePathSave = GetLocalFilePath(path);
 
-            EnsureFolder(filePathSave);
+            MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
 
-            using (WebClient client = new WebClient())
+            await Task.Run(() =>
             {
-                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(OnFileDownloadProgress);
-                await client.DownloadFileTaskAsync(new Uri(host, gameFilesPathOnline + path), filePathSave);
+                System.Threading.Thread.Sleep(1000);
+            });
 
+
+#else
+            if (MainWindow.CurrentGame != null)
+            {
+
+
+                MainWindow.WindowInstance.SetFilenameLabelText(GetLocalFilePath(path));
+
+                await MainWindow.WindowInstance.pgbFileProgress.Dispatcher.BeginInvoke(new Action(delegate ()
+                 {
+                     MainWindow.WindowInstance.pgbFileProgress.Value = 0;
+                     MainWindow.WindowInstance.pgbFileProgress.Maximum = filesize;
+                 }));
+
+                string filePathSave = GetLocalFilePath(path);
+
+                EnsureFolder(filePathSave);
+
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(OnFileDownloadProgress);
+                    await client.DownloadFileTaskAsync(new Uri(host, MainWindow.CurrentGame.gameFilesPathOnline + path), filePathSave);
+
+                }
             }
-
 #endif
         }
 
@@ -180,12 +187,16 @@ namespace GalaxyLauncher
         private static long GetFileSize(string path)
         {
             //File Size Query
-            FtpWebRequest sizeRequest = (FtpWebRequest)WebRequest.Create(gameFilesPathOnline + path);
-            sizeRequest.Method = WebRequestMethods.Ftp.GetFileSize;
-            using (WebResponse response = sizeRequest.GetResponse())
+            if (MainWindow.CurrentGame != null)
             {
-                return response.ContentLength;
+                FtpWebRequest sizeRequest = (FtpWebRequest)WebRequest.Create(MainWindow.CurrentGame.gameFilesPathOnline + path);
+                sizeRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+                using (WebResponse response = sizeRequest.GetResponse())
+                {
+                    return response.ContentLength;
+                }
             }
+            return 0;
         }
 
         private static void OnFileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
@@ -197,7 +208,7 @@ namespace GalaxyLauncher
         }
         private static string GetLocalFilePath(string filename)
         {
-            return string.Format("{0}game{1}", Properties.Settings.Default.GamePath, filename);
+            return string.Format("{0}{2}{1}", Properties.Settings.Default.GamePath, filename,MainWindow.CurrentGame.GameFoldername);
         }
     }
 }

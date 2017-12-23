@@ -43,6 +43,15 @@ namespace GalaxyLauncher
         private Task<List<string>> FileCheckTask;
         private Task DownloaderTask;
 
+        
+
+
+        public static Game GameDankestDunge = new Game("/game/Win64/bin/GameVersion.txt", "dankGame/GameVersion.txt", "/game/Win64/GameManifest.txt", "dankGame/dummyWoW.exe", "game/Win64/bin/","Dankest Dungedon","dankGame");
+        public static Game GameSukg = new Game("/game/SukgWin64/bin/GameVersion.txt", "sukgGame/GameVersion.txt", "/game/SukgWin64/GameManifest.txt", "sukgGame/SUKG.exe", "game/SukgWin64/bin/", "SUKG","sukgGame");
+
+        
+        public static Game CurrentGame = GameDankestDunge;
+
 
         public MainWindow()
         {
@@ -54,7 +63,7 @@ namespace GalaxyLauncher
         private bool IsGameInstalled()
         {
             bool bGamefolder = Directory.Exists(Properties.Settings.Default.GamePath);
-            bool bVersionFile = File.Exists(System.IO.Path.Combine(Properties.Settings.Default.GamePath, StreamHelper.gameVersionFilePathLocal));
+            bool bVersionFile = File.Exists(System.IO.Path.Combine(Properties.Settings.Default.GamePath, CurrentGame.gameVersionFilePathLocal));
 
             return bVersionFile && bGamefolder;
         }
@@ -66,6 +75,7 @@ namespace GalaxyLauncher
 
         private void InitLauncher()
         {
+            
             UpdateInstallPath();
 
             if (!IsGameInstalled())
@@ -102,11 +112,11 @@ namespace GalaxyLauncher
         private bool CheckGameVersion()
         {
             string oldVersionString = "0.0.0";
-            string newVersionString = StreamHelper.ReadFile(StreamHelper.gameVersionFilePathOnline);
+            string newVersionString = StreamHelper.ReadFile(CurrentGame.gameVersionFilePathOnline);
 
             try
             {
-                oldVersionString = File.ReadAllText(System.IO.Path.Combine(Properties.Settings.Default.GamePath, StreamHelper.gameVersionFilePathLocal));
+                oldVersionString = File.ReadAllText(System.IO.Path.Combine(Properties.Settings.Default.GamePath, CurrentGame.gameVersionFilePathLocal));
             }
             catch (Exception ex)
             {
@@ -131,8 +141,8 @@ namespace GalaxyLauncher
 
             ToggleInstallButtons(false);
 
-
-            String data = StreamHelper.ReadFile(StreamHelper.manifestFileOnline);
+            
+            String data = StreamHelper.ReadFile(CurrentGame.manifestFileOnline);
             List<string> lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             var progress = new Progress<int>(percent =>
@@ -203,7 +213,7 @@ namespace GalaxyLauncher
 
 
                 gameProcess = new Process();
-                gameProcess.StartInfo.FileName = System.IO.Path.Combine(Properties.Settings.Default.GamePath, StreamHelper.gameExecutable);
+                gameProcess.StartInfo.FileName = System.IO.Path.Combine(Properties.Settings.Default.GamePath, CurrentGame.gameExecutable);
                 gameProcess.EnableRaisingEvents = true;
                 gameProcess.Exited += GameProcess_Exited;
                 gameProcess.Start();
@@ -277,11 +287,33 @@ namespace GalaxyLauncher
 
                 if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    Properties.Settings.Default.GamePath = fbd.SelectedPath + "\\GalaxyGame\\";
+                    Properties.Settings.Default.GamePath = fbd.SelectedPath + "\\GalaxyLauncher\\";
                     Properties.Settings.Default.Save();
                     UpdateInstallPath();
                 }
             }
+        }
+
+        private void btnDankest_Click(object sender, RoutedEventArgs e)
+        {
+            SetCurrentGame(GameDankestDunge);
+        }
+
+        private void btnSUKG_Click(object sender, RoutedEventArgs e)
+        {
+            SetCurrentGame(GameSukg);
+        }
+
+
+        private void SetCurrentGame(Game inGame)
+        {
+            if (GetWorkerStatus())
+            {
+                return;
+            }
+            lblCurrentGame.Content = inGame.GameName;
+            CurrentGame = inGame;
+            InitLauncher();
         }
     }
 }
