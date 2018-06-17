@@ -43,13 +43,13 @@ namespace GalaxyLauncher
         private Task<List<string>> FileCheckTask;
         private Task DownloaderTask;
 
-        
 
 
-        public static Game GameDankestDunge = new Game("/game/Win64/bin/GameVersion.txt", "dankGame/GameVersion.txt", "/game/Win64/GameManifest.txt", "dankGame/dummyWoW.exe", "game/Win64/bin/","Dankest Dungedon","dankGame");
-        public static Game GameSukg = new Game("/game/SukgWin64/bin/GameVersion.txt", "sukgGame/GameVersion.txt", "/game/SukgWin64/GameManifest.txt", "sukgGame/SUKG.exe", "game/SukgWin64/bin/", "SUKG","sukgGame");
 
-        
+        public static Game GameDankestDunge = new Game("/game/Win64/bin/GameVersion.txt", "dankGame/GameVersion.txt", "/game/Win64/GameManifest.txt", "dankGame/dummyWoW.exe", "game/Win64/bin/", "Dankest Dungedon", "dankGame");
+        public static Game GameSukg = new Game("/game/SukgWin64/bin/GameVersion.txt", "sukgGame/GameVersion.txt", "/game/SukgWin64/GameManifest.txt", "sukgGame/SUKG.exe", "game/SukgWin64/bin/", "SUKG", "sukgGame");
+
+
         public static Game CurrentGame = GameDankestDunge;
 
 
@@ -75,7 +75,7 @@ namespace GalaxyLauncher
 
         private void InitLauncher()
         {
-            
+
             UpdateInstallPath();
 
             if (!IsGameInstalled())
@@ -141,7 +141,7 @@ namespace GalaxyLauncher
 
             ToggleInstallButtons(false);
 
-            
+
             String data = StreamHelper.ReadFile(CurrentGame.manifestFileOnline);
             List<string> lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
@@ -314,6 +314,15 @@ namespace GalaxyLauncher
             lblCurrentGame.Content = inGame.GameName;
             CurrentGame = inGame;
             InitLauncher();
+        }
+
+        private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            bool bGamefolderExists = Directory.Exists(Properties.Settings.Default.GamePath);
+            if (bGamefolderExists)
+            {
+                Process.Start("explorer.exe", Properties.Settings.Default.GamePath);
+            }
         }
     }
 }
