@@ -96,10 +96,11 @@ namespace GalaxyLauncher
         {
             int FileNum = 0;
 
-            //remove patch file  not listed in manifest
+            //remove patch file  not listed in manifest  -- Refactor plx
             bool patchFileExists = false;
+            bool oldPakFileExists = false;
             string patchFileName = "\\dummyWoW\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak";
-
+            string oldPakFilename = "\\dummyWoW\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak";
 
             foreach (var item in fileList)
             {
@@ -113,6 +114,10 @@ namespace GalaxyLauncher
                 if (fileName.Equals(patchFileName))
                 {
                     patchFileExists = true;
+                }
+                if (fileName.Equals(oldPakFilename))
+                {
+                    oldPakFileExists = true;
                 }
 
                 List<String> removeList = new List<string>();
@@ -131,6 +136,14 @@ namespace GalaxyLauncher
             if (!patchFileExists)
             {
                 string patchFilePath = GetLocalFilePath(patchFileName);
+                if (File.Exists(patchFilePath))
+                {
+                    File.Delete(patchFilePath);
+                }
+            }
+            if (!oldPakFileExists)
+            {
+                string patchFilePath = GetLocalFilePath(oldPakFilename);
                 if (File.Exists(patchFilePath))
                 {
                     File.Delete(patchFilePath);
