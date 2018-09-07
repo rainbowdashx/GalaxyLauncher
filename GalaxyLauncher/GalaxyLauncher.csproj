@@ -28,7 +28,7 @@
     <InstallUrl>http://h2412564.stratoserver.net/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,7 +82,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icons\Fasticon-Dinosaurs-Toys-Triceratops.ico</ApplicationIcon>
+    <ApplicationIcon>Dino_BLue.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -185,6 +185,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\appbar.folder.open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Dino_BLue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Dino_BLue.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
