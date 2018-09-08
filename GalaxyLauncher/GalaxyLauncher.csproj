@@ -28,7 +28,7 @@
     <InstallUrl>http://h2412564.stratoserver.net/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,7 +82,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Dino_BLue.ico</ApplicationIcon>
+    <ApplicationIcon>Icons8-Windows-8-Animals-Turtle.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -191,6 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Dino_BLue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Icons8-Windows-8-Animals-Turtle.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons8-Windows-8-Animals-Turtle.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
