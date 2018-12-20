@@ -54,10 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3A3B24DD94CC6CD96797F5505FBB35859B6A7E2F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>E797B05EED01AA662942B86138C6F53D7D80A151</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GalaxyLauncher_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GalaxyLauncher_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -69,7 +69,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GalaxyLauncher_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>GalaxyLauncher_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -139,7 +139,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="GalaxyLauncher_TemporaryKey.pfx" />
+    <None Include="GalaxyLauncher_1_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -197,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons8-Windows-8-Animals-Turtle.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UE4Editor_2018-12-20_01-24-11.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,7 +8,16 @@
         Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="Manual" WindowStyle="None" MouseDown="Window_MouseDown" Background="#FF222222">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Images/footer_lodyas.png" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="Images/UE4Editor_2018-12-20_01-24-11.jpg" Stretch="UniformToFill" AlignmentX="Left">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
         </Grid.Background>
         <Button x:Name="btnClose"  Click="btnClose_Click" Margin="758,10,10,558" Height="32" Width="32">
             <Image Source="Icons/appbar.close.png"/>
@@ -35,14 +44,15 @@
         <Button x:Name="btnInstallPath" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="47,482,722,87" Click="btnInstallPath_Click">
             <Image Source="Icons/appbar.cog.png" />
         </Button>
-        <Button x:Name="btnDankest" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" Width="121" Height="45" Background="{x:Null}" Click="btnDankest_Click">
-            <Label x:Name="lblBtnDank" Content="Dankest Dungeon"/>
+        <Button x:Name="btnDankest" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" Width="131" Height="40" Background="{x:Null}" Click="btnDankest_Click" BorderBrush="{x:Null}">
+            <Label x:Name="lblBtnDank" Content="Dankest Dungeon" FontFamily="Consolas" FontSize="14"/>
         </Button>
-        <Button x:Name="btnSUKG" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="121" Height="45" Background="{x:Null}" Click="btnSUKG_Click">
-            <Label x:Name="lblbtnSukg" Content="SUKG" FontFamily="Impact" FontSize="24"/>
+        <Button x:Name="btnSUKG" HorizontalAlignment="Left" Margin="146,76,0,0" VerticalAlignment="Top" Width="131" Height="40" Background="{x:Null}" Click="btnSUKG_Click" FontFamily="Consolas" FontSize="14" BorderBrush="{x:Null}">
+            <Label x:Name="lblbtnSukg" Content="SUKG" FontFamily="Consolas" FontSize="14"/>
         </Button>
         <Button x:Name="btnOpenFolder" HorizontalAlignment="Left" Margin="10,482,0,0" VerticalAlignment="Top" Width="31" Height="31" Click="btnOpenFolder_Click" >
             <Image Source="Icons/appbar.folder.open.png" />
         </Button>
+        <Separator HorizontalAlignment="Left" Height="14" Margin="0,116,0,0" VerticalAlignment="Top" Width="800" Background="Black"/>
     </Grid>
 </Window>

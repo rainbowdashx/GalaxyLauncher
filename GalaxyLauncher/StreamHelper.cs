@@ -96,12 +96,13 @@ namespace GalaxyLauncher
         {
             int FileNum = 0;
 
-            //remove patch file  not listed in manifest  -- Refactor plx
-            bool patchFileExists = false;
-            bool oldPakFileExists = false;
-            string patchFileName = "\\dummyWoW\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak";
-            string oldPakFilename = "\\dummyWoW\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak";
+            List<String> CheckFilesForDeletion = new List<string>();
+            CheckFilesForDeletion.AddRange(new string[] { "\\dummyWoW\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak",
+                                                     "\\dummyWoW\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak"
+            });
 
+            HashSet<String> DeleteFiles = new HashSet<string>();
+            
             foreach (var item in fileList)
             {
                 string[] fileString = item.Split(':');
@@ -111,21 +112,21 @@ namespace GalaxyLauncher
 
                 string filePath = GetLocalFilePath(fileName);
 
-                if (fileName.Equals(patchFileName))
+           
+                foreach (var DeletionItem in CheckFilesForDeletion)
                 {
-                    patchFileExists = true;
-                }
-                if (fileName.Equals(oldPakFilename))
-                {
-                    oldPakFileExists = true;
+                    if (fileName.Equals(DeletionItem))
+                    {
+                        DeleteFiles.Add(DeletionItem);
+                    }
                 }
 
-                List<String> removeList = new List<string>();
+                List<String> SkipFileList = new List<string>();
                 if (File.Exists(filePath) && GetChecksum(filePath).Equals(fileHash))
                 {
-                    removeList.Add(item);
+                    SkipFileList.Add(item);
                 }
-                fileList = fileList.Except(removeList).ToList();
+                fileList = fileList.Except(SkipFileList).ToList();
                 FileNum++;
                 if (progress != null)
                 {
@@ -133,22 +134,16 @@ namespace GalaxyLauncher
                 }
             }
 
-            if (!patchFileExists)
+
+            foreach (var item in DeleteFiles)
             {
-                string patchFilePath = GetLocalFilePath(patchFileName);
-                if (File.Exists(patchFilePath))
+                string LocalFilePath = GetLocalFilePath(item);
+                if (File.Exists(LocalFilePath))
                 {
-                    File.Delete(patchFilePath);
+                    File.Delete(LocalFilePath);
                 }
             }
-            if (!oldPakFileExists)
-            {
-                string patchFilePath = GetLocalFilePath(oldPakFilename);
-                if (File.Exists(patchFilePath))
-                {
-                    File.Delete(patchFilePath);
-                }
-            }
+
             return Task.FromResult(fileList);
         }
 
