@@ -103,10 +103,10 @@ namespace GalaxyLauncher
 
             for (int i = 0; i < 6; i++)
             {
-                CheckFilesForDeletion.Add(String.Format("\\dummyWoW\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P", i));
+                CheckFilesForDeletion.Add(String.Format("\\dummyWoW\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P.pak", i));
             }
 
-            HashSet<String> DeleteFiles = new HashSet<string>();
+           
 
             foreach (var item in fileList)
             {
@@ -118,14 +118,9 @@ namespace GalaxyLauncher
                 string filePath = GetLocalFilePath(fileName);
 
 
-                foreach (var DeletionItem in CheckFilesForDeletion)
-                {
-                    if (fileName.Equals(DeletionItem))
-                    {
-                        DeleteFiles.Add(DeletionItem);
-                    }
-                }
+                CheckFilesForDeletion.Remove(fileName);
 
+            
                 List<String> SkipFileList = new List<string>();
                 if (File.Exists(filePath) && GetChecksum(filePath).Equals(fileHash))
                 {
@@ -140,7 +135,7 @@ namespace GalaxyLauncher
             }
 
 
-            foreach (var item in DeleteFiles)
+            foreach (var item in CheckFilesForDeletion)
             {
                 string LocalFilePath = GetLocalFilePath(item);
                 if (File.Exists(LocalFilePath))
