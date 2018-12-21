@@ -101,8 +101,13 @@ namespace GalaxyLauncher
                                                      "\\dummyWoW\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak"
             });
 
+            for (int i = 0; i < 6; i++)
+            {
+                CheckFilesForDeletion.Add(String.Format("\\dummyWoW\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P", i));
+            }
+
             HashSet<String> DeleteFiles = new HashSet<string>();
-            
+
             foreach (var item in fileList)
             {
                 string[] fileString = item.Split(':');
@@ -112,7 +117,7 @@ namespace GalaxyLauncher
 
                 string filePath = GetLocalFilePath(fileName);
 
-           
+
                 foreach (var DeletionItem in CheckFilesForDeletion)
                 {
                     if (fileName.Equals(DeletionItem))
@@ -216,7 +221,7 @@ namespace GalaxyLauncher
         }
         private static string GetLocalFilePath(string filename)
         {
-            return string.Format("{0}{2}{1}", Properties.Settings.Default.GamePath, filename,MainWindow.CurrentGame.GameFoldername);
+            return string.Format("{0}{2}{1}", Properties.Settings.Default.GamePath, filename, MainWindow.CurrentGame.GameFoldername);
         }
     }
 }
