@@ -46,7 +46,7 @@ namespace GalaxyLauncher
 
 
 
-        public static Game GameDankestDunge = new Game("/game/Win64/bin/GameVersion.txt", "dankGame/GameVersion.txt", "/game/Win64/GameManifest.txt", "dankGame/dummyWoW.exe", "game/Win64/bin/", "Dankest Dungedon", "dankGame");
+        public static Game GameDankestDunge = new Game("/game/Win64/bin/GameVersion.txt", "GalaxyGame/GameVersion.txt", "/game/Win64/GameManifest.txt", "GalaxyGame/Galaxy.exe", "game/Win64/bin/", "Project Galaxy", "GalaxyGame");
         public static Game GameSukg = new Game("/game/SukgWin64/bin/GameVersion.txt", "sukgGame/GameVersion.txt", "/game/SukgWin64/GameManifest.txt", "sukgGame/SUKG.exe", "game/SukgWin64/bin/", "SUKG", "sukgGame");
 
 
