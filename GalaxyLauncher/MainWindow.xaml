@@ -36,7 +36,7 @@
 
         <ProgressBar x:Name="pgbDownload" x:FieldModifier="public" HorizontalAlignment="Left" Height="32" Margin="10,558,0,0" VerticalAlignment="Top" Width="336"/>
         <Label x:Name="label" Content="Galaxy Launcher" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Consolas" Height="71" Width="743" FontSize="52"/>
-        <Label x:Name="lblCurrentGame" Content="Dankest Dungedon" HorizontalAlignment="Left" Margin="422,537,0,0" VerticalAlignment="Bottom" FontSize="32" Foreground="White" Width="297" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblCurrentGame" Content="Project Galaxy" HorizontalAlignment="Left" Margin="422,537,0,0" VerticalAlignment="Bottom" FontSize="32" Foreground="White" Width="297" HorizontalContentAlignment="Right"/>
         <Label x:Name="lblCurrentFile" Content="FileName" HorizontalAlignment="Left" Margin="10,517,0,0" VerticalAlignment="Top" Foreground="White" Width="709"/>
         <ProgressBar x:Name="pgbFileProgress" HorizontalAlignment="Left" Height="10" Margin="10,543,0,0" VerticalAlignment="Top" Width="336" Foreground="Magenta"/>
         <Label x:Name="lblInstallPath" Content="Label" HorizontalAlignment="Left" Margin="83,481,0,0" VerticalAlignment="Top" Width="688" Foreground="White" Height="31"/>
@@ -45,7 +45,7 @@
             <Image Source="Icons/appbar.cog.png" />
         </Button>
         <Button x:Name="btnDankest" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" Width="131" Height="40" Background="{x:Null}" Click="btnDankest_Click" BorderBrush="{x:Null}">
-            <Label x:Name="lblBtnDank" Content="Dankest Dungeon" FontFamily="Consolas" FontSize="14"/>
+            <Label x:Name="lblBtnDank" Content="Project Galaxy" FontFamily="Consolas" FontSize="14"/>
         </Button>
         <Button x:Name="btnSUKG" HorizontalAlignment="Left" Margin="146,76,0,0" VerticalAlignment="Top" Width="131" Height="40" Background="{x:Null}" Click="btnSUKG_Click" FontFamily="Consolas" FontSize="14" BorderBrush="{x:Null}">
             <Label x:Name="lblbtnSukg" Content="SUKG" FontFamily="Consolas" FontSize="14"/>
