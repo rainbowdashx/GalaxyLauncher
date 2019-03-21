@@ -97,13 +97,13 @@ namespace GalaxyLauncher
             int FileNum = 0;
 
             List<String> CheckFilesForDeletion = new List<string>();
-            CheckFilesForDeletion.AddRange(new string[] { "\\dummyWoW\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak",
-                                                     "\\dummyWoW\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak"
+            CheckFilesForDeletion.AddRange(new string[] { "\\galaxy\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak",
+                                                     "\\galaxy\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak"
             });
 
             for (int i = 0; i < 6; i++)
             {
-                CheckFilesForDeletion.Add(String.Format("\\dummyWoW\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P.pak", i));
+                CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P.pak", i));
             }
 
            
