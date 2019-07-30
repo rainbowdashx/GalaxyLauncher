@@ -12,7 +12,7 @@ namespace GalaxyLauncher
     public static class StreamHelper
     {
 
-        public static Uri host = new Uri("ftp://h2412564.stratoserver.net/");
+        public static Uri host = new Uri("ftp://h2844272.stratoserver.net/");
         //         public static String gameVersionFilePathOnline = "/game/Win64/bin/GameVersion.txt";
         //         public static String gameVersionFilePathLocal = "game/GameVersion.txt";
         //         public static String manifestFileOnline = "/game/Win64/GameManifest.txt";
