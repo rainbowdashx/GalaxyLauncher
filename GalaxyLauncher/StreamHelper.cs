@@ -98,15 +98,20 @@ namespace GalaxyLauncher
 
             List<String> CheckFilesForDeletion = new List<string>();
             CheckFilesForDeletion.AddRange(new string[] { "\\galaxy\\Content\\Paks\\pakchunk0-WindowsNoEditor_P.pak",
-                                                     "\\galaxy\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak"
+                                                     "\\galaxy\\Content\\Paks\\dummyWoW-WindowsNoEditor.pak",
+                                                     "\\galaxy\\Content\\Paks\\galaxy-WindowsNoEditor.pak"
+
             });
 
             for (int i = 0; i < 6; i++)
             {
                 CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P.pak", i));
             }
+            for (int i = 0; i < 6; i++)
+            {
+                CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\galaxy-WindowsNoEditor_{0}_P.pak", i));
+            }
 
-           
 
             foreach (var item in fileList)
             {
