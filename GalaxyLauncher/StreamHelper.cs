@@ -103,7 +103,7 @@ namespace GalaxyLauncher
 
             });
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 20; i++)
             {
                 CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P.pak", i));
             }
