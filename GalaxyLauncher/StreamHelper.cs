@@ -112,6 +112,8 @@ namespace GalaxyLauncher
                 CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\galaxy-WindowsNoEditor_{0}_P.pak", i));
             }
 
+            CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\galaxy-WindowsNoEditor_{0}_P.pak", 2000));
+            CheckFilesForDeletion.Add(String.Format("\\galaxy\\Content\\Paks\\pakchunk{0}-WindowsNoEditor_0_P.pak", 2000));
 
             foreach (var item in fileList)
             {
